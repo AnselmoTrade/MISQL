@@ -6,14 +6,14 @@
     <title>Documentos</title>
 </head>
 <style>
-    background-color: #f4f4f4;
+    background-color: #000000ff;
     body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
     }
     h1 {
-        color: #333;
+        color: red;
     }
     ul {
         list-style-type: none;
