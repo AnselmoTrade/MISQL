@@ -3,32 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Documentos</title>
 </head>
-<style>
-    background-color: #000000ff;
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-    h1 {
-        color: red;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        background: #fff;
-        margin: 10px 0;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-</style>
 <body>
-    <h1>Lista de PDFs</h1>
+    <h1 class="titulo">Lista de PDFs</h1>
     <ul>
         <?php
         $query = "SELECT * FROM Pdfs ORDER BY fecha_subida DESC";
