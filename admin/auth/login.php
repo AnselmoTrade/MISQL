@@ -28,11 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Login Administrador</title>
-    <link rel="stylesheet" href="./estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
     <div class="container">
