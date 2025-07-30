@@ -19,26 +19,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: panel.php");
             exit;
         } else {
-            $mensaje = "Contraseña incorrecta.";
+            $mensaje = "❌ Contraseña incorrecta.";
         }
     } else {
-        $mensaje = "Usuario no encontrado.";
+        $mensaje = "❌ Usuario no encontrado.";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Login Administrador</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <h2>Iniciar Sesión (Administrador)</h2>
-    <form method="POST">
-        <input type="text" name="usuario" placeholder="Usuario" required><br>
-        <input type="password" name="contrasena" placeholder="Contraseña" required><br>
-        <button type="submit">Entrar</button>
-    </form>
-    <p style="color:red;"><?php echo $mensaje; ?></p>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <form method="POST">
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <?php if ($mensaje): ?>
+            <p class="error"><?php echo $mensaje; ?></p>
+        <?php endif; ?>
+    </div>
+    <script src="login.js"></script>
 </body>
 </html>
+
