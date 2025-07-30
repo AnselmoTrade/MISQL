@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <title>Subir PDF</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
