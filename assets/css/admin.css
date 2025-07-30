@@ -1,0 +1,64 @@
+:root {
+  --color-principal: #1E2A38;
+  --color-secundario: #4DB6AC;
+  --color-fondo: #F4F6F8;
+  --color-blanco: #FFFFFF;
+  --color-texto: #333333;
+  --color-hover: #35797F;
+}
+
+body {
+  background-color: var(--color-fondo);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--color-texto);
+  padding: 2rem;
+}
+
+h2 {
+  color: var(--color-principal);
+}
+
+form {
+  background-color: var(--color-blanco);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: auto;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.05);
+}
+
+a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-principal);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
