@@ -1,57 +1,41 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit;
-}
-include '../conexion.php';
-
-$id = $_GET['id'] ?? null;
-if (!$id) {
-    die("ID no válido.");
+    header("Location: index.html");
+    exit();
 }
 
-// Obtener el nombre del archivo
-$query = "SELECT titulo, archivo FROM Pdfs WHERE id = ?";
-$stmt = sqlsrv_query($conn, $query, [$id]);
-$pdf = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+require 'conexion.php';
 
-if (!$pdf) {
-    die("PDF no encontrado.");
-}
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
 
-$archivo = "../uploads/" . $pdf['archivo'];
+    // Buscar el nombre del archivo
+    $stmt = $conn->prepare("SELECT archivo FROM documentos WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
-// Si se confirma la eliminación
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $query = "DELETE FROM Pdfs WHERE id = ?";
-    $stmt = sqlsrv_query($conn, $query, [$id]);
+    if ($resultado->num_rows === 1) {
+        $doc = $resultado->fetch_assoc();
+        $archivo = 'documentos/' . $doc['archivo'];
 
-    if ($stmt && file_exists($archivo)) {
-        unlink($archivo);
+        // Eliminar archivo del servidor si existe
+        if (file_exists($archivo)) {
+            unlink($archivo); // Elimina el archivo del servidor
+        }
+
+        // Eliminar registro de la base de datos
+        $stmt = $conn->prepare("DELETE FROM documentos WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        header("Location: admin.php");
+        exit();
+    } else {
+        echo "❌ Documento no encontrado.";
     }
-
-    header("Location: panel.php");
-    exit;
+} else {
+    echo "❌ Parámetro inválido.";
 }
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Confirmar Eliminación</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <div class="container">
-        <h2>¿Eliminar PDF?</h2>
-        <p>¿Estás seguro de que deseas eliminar el archivo <strong><?php echo htmlspecialchars($pdf['titulo']); ?></strong>?</p>
-
-        <form method="POST">
-            <button type="submit" class="button">Sí, eliminar</button>
-            <a href="panel.php" class="button" style="background-color: var(--color-principal);">Cancelar</a>
-        </form>
-    </div>
-    <script src="eliminar.js"></script>
-</body>
-</html>
